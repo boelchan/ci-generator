@@ -14,7 +14,7 @@
 		<?php  ?>
 
 		<ul class="page-sidebar-menu <?php echo $page_sidebar_menu_closed ?> " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-			<li class="nav-item <?php if ($this->uri->segment(1) == 'Dashboard') echo 'active' ?> ">
+			<li class="nav-item <?php if ($this->uri->segment(1) == 'dashboard') echo 'active' ?> ">
 				<a href="<?php echo site_url('dashboard') ?>" class="nav-link">
 					<i class="icon-bar-chart"></i>
                     <span class="title">Dashboard</span>

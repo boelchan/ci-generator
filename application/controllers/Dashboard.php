@@ -8,9 +8,14 @@ class Dashboard extends MY_Controller
     public function index()
     {
         $this->title = 'Dashboard';
-        $data['data'] = '';
+        $this->load->model(['mWilayahModel', 'garamGudangModel']);
+        
+        $data['wilayahs'] = $this->mWilayahModel->get_all();
+        
+        
         $this->template('welcome_message', $data);
     }
+    
     public function laporan()
     {
         $this->load->library('livedjasperreport');
