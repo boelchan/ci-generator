@@ -32,6 +32,7 @@ class SisaDOModel extends MY_Model
         $i = 0;
         $dataOrder[$i++] = $this->primary_key;
         $dataOrder[$i++] = 'no_spjg';
+        $dataOrder[$i++] = 'nama_kualitas';
         $dataOrder[$i++] = 'pemasukan';
         $dataOrder[$i++] = 'pengeluaran';
         $dataOrder[$i++] = 'sisa'; 

@@ -1,6 +1,6 @@
 <div class='row'>
     <div class='col-md-12'>
-        <div class='portlet light bordered'>
+        <div class='portlet box green-meadow bordered'>
             <div class='portlet-title'>
                 <div class="caption">
                     <span class="caption-subject font-dark sbold">Data</span>
@@ -13,15 +13,14 @@
                 <div class='table-container'>
                     <table class="table table-bordered table-hover" id="tableSisaDO">
                         <thead>
-                            <tr role="row" class="heading" id="tableHeader">
-                                <th width="2%"> 
-                                      
-                                </th>
+                            <tr role="row" class="heading" id="tableHeader" >
+                                <th class="bg-green-jungle font-white" width="2%"> </th>
                         
-                                <th>No Spjg</th>
-                                <th>Pemasukan</th>
-                                <th>Pengeluaran</th>
-                                <th>Sisa</th>
+                                <th class="bg-green-jungle font-white">Nomor DO</th>
+                                <th class="bg-green-jungle font-white">Kualitas</th>
+                                <th class="bg-green-jungle font-white">Pemasukan</th>
+                                <th class="bg-green-jungle font-white">Pengeluaran</th>
+                                <th class="bg-green-jungle font-white">Sisa</th>
                                 
                             </tr>
                         </thead>
@@ -48,7 +47,7 @@
             ],
             "columnDefs": [
                 {
-                    targets: [2,3,4],
+                    targets: [3,4,5],
                     className: 'dt-body-right',
                     orderable:true
                 },

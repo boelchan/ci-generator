@@ -3,10 +3,10 @@
     <div class='row'>
 	<?php foreach ($wilayahs as $wil) : ?>
         <div class='col-md-4'>
-            <div class='portlet light'>
+            <div class='portlet box <?php echo $wil->color ?>'>
                 <div class='portlet-title'>
                     <div class='caption'>
-								<?php echo $wil->nama_wilayah ?>
+						<?php echo $wil->nama_wilayah ?>
                     </div>
                 </div>
                 <div class='portlet-body'>
@@ -26,7 +26,7 @@
 											<td><?php echo $d->nama_kualitas ?></td>
 											<td class="text-right"><?php echo idr($d->masuk) ?></td>
 											<td class="text-right"><?php echo idr($d->keluar) ?></td>
-											<td class="text-right"><?php echo idr($d->sisa) ?></td>
+											<td class="text-right bg-green-soft"><?php echo idr($d->sisa) ?></td>
 										</tr>
 									<?php endforeach ?>
 									

@@ -20,7 +20,7 @@
         <div class="page-actions">
             <!-- <i style="color:#fff">Lokasi&nbsp;</i> </span><span style="padding-top:20px!important;font-size:25px; color:#fff">
             </span> -->
-            <h4 class="logo-default" style="font-weight:1000; color:#fff; text-shadow: 2px 2px 15px  #000">ODHE-R</h4>
+            <h4 class="logo-default" style="font-weight:1000; color:#fff; text-shadow: 2px 2px 15px  #000">ODHE-R Bin CV. MEDIA UTAMA GROUP</h4>
         </div>
         <!-- END PAGE ACTIONS -->
         <!-- BEGIN PAGE TOP -->

@@ -50,6 +50,7 @@ class SisaDO extends MY_Controller
                 $records["data"][] = array(
                     $i++,
 					$d->no_spjg,
+					$d->nama_kualitas,
 					idr($d->pemasukan),
 					idr($d->pengeluaran),
 					idr($d->sisa)

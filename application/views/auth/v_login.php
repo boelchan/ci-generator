@@ -102,7 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
             <?= form_open(site_url('auth/login_action'), 'class="login-form"', ''); ?>
-                <h3 class="form-title font-dark">ODHE-R</h3>
+                <h4 class="form-title text-center font-dark bold">ODHE-R <br>Bin <br> <span class="font-yellow">CV. MEDIA UTAMA GROUP</span></h4>
                 <h4 class="text-center font-dark">INVENTORI GARAM</h4>
                 <br>
                 <?php echo $this->session->flashdata('message'); ?>
