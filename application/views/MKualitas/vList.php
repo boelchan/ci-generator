@@ -1,6 +1,6 @@
 <div class='row'>
     <div class='col-md-12'>
-        <div class='portlet light bordered'>
+        <div class='portlet box green-meadow bordered'>
             <div class='portlet-title'>
                 <div class="caption">
                     <span class="caption-subject font-dark sbold">Data</span>
