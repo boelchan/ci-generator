@@ -7,7 +7,14 @@ class Dashboard extends MY_Controller
 
     public function index()
     {
-        $this->title = 'Dashboard';
+        if ( $this->is_admin )
+        {
+            $this->title = 'Dashboard';
+        }
+        else
+        {
+            $this->title = 'Selamat Datang';
+        }
         $this->load->model(['mWilayahModel', 'garamGudangModel']);
         
         $data['wilayahs'] = $this->mWilayahModel->get_all();
