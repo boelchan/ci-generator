@@ -216,6 +216,7 @@ EOD;
                             ->join('m_gudang', 'gudang_id=id_gudang')
                             ->join('m_kantor', 'kantor_id=id_kantor')
                             ->join('m_wilayah', 'wilayah_id=id_wilayah')
+                            ->where('wilayah_id', $this->input->get('wilayah'))
                             ->where('kualitas_id', $this->input->get('kualitas'))
                             ->where('tanggal >=', sys_date($this->input->get('from')).' 00:01:01')
                             ->where('tanggal <=', sys_date($this->input->get('to')).' 23:59:59')
@@ -223,7 +224,7 @@ EOD;
                             ->get('pemasukan');
         $tabel_isi = '';
         $i = 1;
-        $total_tonase = 1;
+        $total_tonase = 0;
         foreach ($q->result() as $d) {
             $tabel_isi .= "<tr>
                 <td width=\"5%\" style=\"text-align:center\">". $i++. "</td>
@@ -378,6 +379,7 @@ EOD;
                             ->join('m_gudang', 'gudang_id=id_gudang')
                             ->join('m_kantor', 'kantor_id=id_kantor')
                             ->join('m_wilayah', 'wilayah_id=id_wilayah')
+                            ->where('wilayah_id', $this->input->get('wilayah'))
                             ->where('kualitas_id', $this->input->get('kualitas'))
                             ->where('tanggal >=', sys_date($this->input->get('from')).' 00:01:01')
                             ->where('tanggal <=', sys_date($this->input->get('to')).' 23:59:59')
