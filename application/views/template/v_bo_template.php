@@ -131,7 +131,7 @@
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2020 &copy; Tim Kreatif ODHE-R
+            <div class="page-footer-inner"> 2020 &copy; Tim Kreatif ODHE-R & <a href="mailto:boelchan@live.com">BOOLEAN DEV</a>
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>

@@ -63,11 +63,43 @@
                         </div>
                         <div class='col-md-12'>
                             <div class='form-group'>
-                                <label class='col-md-3 control-label'>Grup  <span class="font-red">*</span></label>
+                                <label class='col-md-3 control-label'>Group  <span class="font-red">*</span></label>
+                                <div class='col-md-4'>
+                                <?php 
+                                    echo form_dropdown('group_id', $opt_group, '' ,'class="form-control form-filter select2"');
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='col-md-12'>
+                            <div class='form-group'>
+                                <label class='col-md-3 control-label'>Wilayah  <span class="font-red">*</span></label>
                                 <div class='col-md-4'>
                                 <?php 
                                     echo form_dropdown('wilayah_id', $opt_wilayah, '' ,'class="form-control form-filter select2"');
                                     ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ope-4">
+                            <div class='col-md-12'>
+                                <div class='form-group'>
+                                    <label class='col-md-3 control-label'>Kantor  <span class="font-red">*</span></label>
+                                    <div class='col-md-4'>
+                                    <?php 
+                                        echo form_dropdown('kantor_id', [], '' ,'class="form-control form-filter select2"');
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>        
+                            <div class='col-md-12'>
+                                <div class='form-group'>
+                                    <label class='col-md-3 control-label'>Gudang  <span class="font-red">*</span></label>
+                                    <div class='col-md-4'>
+                                    <?php 
+                                        echo form_dropdown('gudang_id', [], '' ,'class="form-control form-filter select2"');
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -88,3 +120,35 @@
         </div>
     </div>
 </div> 
+
+<script>
+$('#ope-4').hide()
+$('select[name=group_id]').change(function (e) { 
+    e.preventDefault();
+    if ( $(this).val() == 4 )
+    {
+        $('#ope-4').show()
+    }
+    if ( $(this).val() == 2 )
+    {
+        $('#ope-4').hide()
+    }
+});
+
+
+    $('select[name=wilayah_id').change(function (e) { 
+        e.preventDefault();
+        var target = $('select[name=kantor_id')
+        var data   = {id:$(this).val(), [csrfName]:csrfHash}
+        var url    = "<?php echo site_url('laporan/getKantor') ?>"
+        main.dropdownAjax(target, data, url)
+    });
+
+    $('select[name=kantor_id').change(function (e) { 
+        e.preventDefault();
+        var target = $('select[name=gudang_id')
+        var data   = {id:$(this).val(), [csrfName]:csrfHash}
+        var url    = "<?php echo site_url('laporan/getGudang') ?>"
+        main.dropdownAjax(target, data, url)
+    });
+</script>

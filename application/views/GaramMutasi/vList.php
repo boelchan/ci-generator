@@ -5,9 +5,9 @@
                 <div class='caption'>
                     <?php echo btnBack(site_url('mKantor/read/'.@$kantor->id_kantor), '') ?>
                     <?php if ($this->group_id == 1) : ?>
-                    <a href="<?php echo site_url('pemasukan?gudang-garam='.$row->id_garam_gudang) ?>" class="btn btn-outline btn-circle green" id="tambah"  title="pemasukan"><i class="fa fa-arrow-down "></i>Tambah Pemasukan</a>
+                    <a href="<?php echo site_url('pemasukan?gudang-garam='.$row->id_garam_gudang) ?>" class="btn btn-outline btn-circle green" id="tambah"  title="pemasukan"><i class="fa fa-arrow-down "></i>Pemasukan</a>
                     <?php endif ?>
-                    <a href="<?php echo site_url('pengeluaran?gudang-garam='.$row->id_garam_gudang) ?>" class="btn btn-outline btn-circle yellow" id="kurang" title="pengeluaran"><i class="fa fa-arrow-up "></i> Tambah Pengeluaran</a>
+                    <a href="<?php echo site_url('pengeluaran?gudang-garam='.$row->id_garam_gudang) ?>" class="btn btn-outline btn-circle yellow" id="kurang" title="pengeluaran"><i class="fa fa-arrow-up "></i> Pengeluaran</a>
                 </div>
             </div>
             <div class='portlet-body form'>

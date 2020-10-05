@@ -17,7 +17,13 @@
                     <?php endif ?>
                     </h3>
                     <?php 
-                    $kantors = $this->mKantorModel->where('wilayah_id', $wil->id_wilayah)->get_all();
+                    if ($this->group_id == 4) {
+                        $wilayah = $this->ion_auth_model->get_users_wilayah($this->jwt->user_id)->row();
+                        $kantors = $this->mKantorModel->where('id_kantor', $wilayah->kantor_id)->get_all();
+                    } else {
+                        $kantors = $this->mKantorModel->where('wilayah_id', $wil->id_wilayah)->get_all();
+                    }
+                    
                     if ( $kantors )
                     {
                         foreach ( $kantors as $kan)

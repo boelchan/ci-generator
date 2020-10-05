@@ -55,6 +55,8 @@
     </div>
 <!-- </div> 
 <div class='row'> -->
+<?php if (in_array($this->group_id, [1,2]) ) : ?>
+
     <div class='col-md-8'>
         <div class='portlet light'>
             <div class='portlet-title'>
@@ -176,6 +178,7 @@
             </div>
         </div>
     </div>
+<?php endif ?>
 </div> 
 <div class='row'>
     <div class='col-md-12'>

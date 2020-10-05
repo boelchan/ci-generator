@@ -28,13 +28,17 @@ class MKantor extends MY_Controller
 
     public function index()
     {
-        if ( $this->group_id == 2 )
+        if ( $this->group_id == 1 )
+        {
+            $data['wilayahs'] = $this->mWilayahModel->get_all();
+        }
+        else if ( $this->group_id == 2 )
         {
             $data['wilayahs'] = $this->mWilayahModel->where('id_wilayah', $this->wilayah_id)->get_all();
         }
-        else
+        else 
         {
-            $data['wilayahs'] = $this->mWilayahModel->get_all();
+            $data['wilayahs'] = $this->mWilayahModel->where('id_wilayah', $this->wilayah_id)->get_all();
         }
         $this->template('MKantor/vList', $data);
     }
@@ -48,7 +52,13 @@ class MKantor extends MY_Controller
             $this->cek_wilayah($row->wilayah_id);
             
             $data['row'] = $row;
-            $data['gudangs'] = $this->mGudangModel->where('kantor_id', $id)->get_all();
+
+            if ($this->group_id == 4) {
+                $wilayah = $this->ion_auth_model->get_users_wilayah($this->jwt->user_id)->row();
+                $data['gudangs'] = $this->mGudangModel->where('id_gudang', $wilayah->gudang_id)->get_all();
+            } else {
+                $data['gudangs'] = $this->mGudangModel->where('kantor_id', $id)->get_all();
+            }
             
             $this->template('MKantor/vRead',$data);
         } 

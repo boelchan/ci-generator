@@ -12,7 +12,7 @@ class Users extends MY_Controller
         $this->areaUrl = site_url('Users/');
         
         $this->load->model([
-            'mWilayahModel'
+            'mWilayahModel','mKantorModel','mGudangModel'
         ]);
 
         $this->cekGroup(1);
@@ -46,11 +46,24 @@ class Users extends MY_Controller
 
                 $checkbox = '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"> <input type="checkbox" class="checkboxes" name="id[]" value="'.$id.'" /> <span></span> </label>';
 
+                $wilayah = $this->ion_auth_model->get_users_wilayah($id)->row();
+
+                $gudang = 'Semua';
+
+                if ( $wilayah->group_id == 4 )
+                {
+                    $nama_kantor = $this->mKantorModel->fields('nama_kantor')->get(@$wilayah->kantor_id)->nama_kantor;
+                    $nama_gudang = $this->mGudangModel->fields('nama_gudang')->get(@$wilayah->gudang_id)->nama_gudang;
+                    $gudang = $nama_kantor.' <i class="fa fa-arrow-right"></i> '. $nama_gudang;
+                }
+                
                 $records["data"][] = array(
                     $checkbox,
 					$d->first_name,
 					btnRead($id, $d->email),
-					($this->ion_auth_model->get_users_wilayah($id)->row()->nama_wilayah),
+                    ($this->ion_auth_model->get_users_groups($id)->row()->name),
+                    $wilayah->nama_wilayah,
+                    $gudang,
 					(is_null($d->last_login) ? '':date("Y-m-d H:i:s", $d->last_login)),
 					($d->active == 1 ? 'Aktif' : 'Tidak Aktif'),
                     btnEditTable($id)
@@ -83,8 +96,8 @@ class Users extends MY_Controller
     public function create()
     {
         $data['action']    = $this->areaUrl.'store';
-        // $data['opt_group'] = $this->groupsModel->as_dropdown('name')->where('id <> ','1')->get_all();
-        $data['opt_wilayah'] = $this->mWilayahModel->as_dropdown('nama_wilayah')->get_all();
+        $data['opt_group'] = $this->groupsModel->as_dropdown('name')->where('id <> ','1')->get_all();
+        $data['opt_wilayah'] = [''=>'pilih']+$this->mWilayahModel->as_dropdown('nama_wilayah')->get_all();
         $this->template('Users/vCreate',$data);
     }
 
@@ -99,6 +112,11 @@ class Users extends MY_Controller
         $this->form_validation->set_rules('rpassword','password','trim|required|matches[password]');
         $this->form_validation->set_rules('email','email','trim|required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('active','active','trim|required');
+        if ( $this->input->post('group_id')  == 4)
+        {
+            $this->form_validation->set_rules('kantor_id','kantor','trim|required');
+            $this->form_validation->set_rules('gudang_id','gudang','trim|required');
+        }
         $this->form_validation->set_rules('first_name','Nama','trim|required');
         $this->form_validation->set_rules('wilayah_id','Wilayah','trim|required');
 
@@ -121,9 +139,14 @@ class Users extends MY_Controller
             {
                 $data_user_group = array(
                     'user_id' => $id,
-                    'group_id' => 2,
-                    'wilayah_id' => $this->input->post('wilayah_id')
+                    'group_id' => $this->input->post('group_id'),
+                    'wilayah_id' => $this->input->post('wilayah_id'),
                 );
+                if ( $this->input->post('group_id') == 4 )
+                {
+                    $data_user_group['kantor_id'] = $this->input->post('kantor_id');
+                    $data_user_group['gudang_id'] = $this->input->post('gudang_id');
+                }
                 $this->usersGroupsModel->insert($data_user_group);
                 
                 $res['url']     = $this->areaUrl;
@@ -143,10 +166,15 @@ class Users extends MY_Controller
 
         if ($row) 
         {
+
+            $data['groups'] = $this->ion_auth_model->get_users_wilayah($row->id)->row();
+
             $data['row'] = $row;
             $data['id']  = $row->id;
-            // $data['opt_group'] = $this->groupsModel->as_dropdown('name')->where('id <> ','1')->get_all();
+            $data['opt_group'] = $this->groupsModel->as_dropdown('name')->where('id <> ','1')->get_all();
             $data['opt_wilayah'] = $this->mWilayahModel->as_dropdown('nama_wilayah')->get_all();
+            $data['opt_kantor'] = [''=>'Pilih']+$this->mKantorModel->as_dropdown('nama_kantor')->where('wilayah_id', $data['groups']->wilayah_id)->get_all();
+            $data['opt_gudang'] = $this->mGudangModel->as_dropdown('nama_gudang')->where('kantor_id', $data['groups']->kantor_id)->get_all();
             $this->template('Users/vEdit',$data);
         } 
         else 
@@ -183,6 +211,13 @@ class Users extends MY_Controller
         $this->form_validation->set_rules('first_name','Nama','trim|required');
         $this->form_validation->set_rules('wilayah_id','wilayah','trim|required');
 
+        if ( $this->input->post('group_id')  == 4)
+        {
+            $this->form_validation->set_rules('kantor_id','kantor','trim|required');
+            $this->form_validation->set_rules('gudang_id','gudang','trim|required');
+        }
+
+
         if ($this->form_validation->run() == FALSE) 
         {
             $res['message'] = 'Lengkapi inputan dengan benar';
@@ -208,9 +243,15 @@ class Users extends MY_Controller
                 {
                     $data_user_group = array(
                         'user_id' => $id,
-                        'group_id' => 2,
-                        'wilayah_id' => $this->input->post('wilayah_id')
+                        'group_id' => $this->input->post('group_id'),
+                        'wilayah_id' => $this->input->post('wilayah_id'),
                     );
+                    if ( $this->input->post('group_id') == 4 )
+                    {
+                        $data_user_group['kantor_id'] = $this->input->post('kantor_id');
+                        $data_user_group['gudang_id'] = $this->input->post('gudang_id');
+                    }
+                        
                     $this->usersGroupsModel->where('user_id', $id)->delete();
                     $this->usersGroupsModel->insert($data_user_group);
     

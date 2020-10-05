@@ -69,7 +69,9 @@
                                 </th>
                                 <th>Nama</th>
                                 <th>Email</th>
+                                <th>Group</th>
                                 <th>Wilayah</th>
+                                <th>Gudang</th>
                                 <th>Last Login</th>
                                 <th>Aktif</th>
                                 <th width="3%"></th>
@@ -96,7 +98,7 @@
                 [1, "asc"]
             ],
             "columnDefs": [
-                { 'orderable': false, 'targets': [3] }
+                // { 'orderable': false, 'targets': [3] }
             ],
         }
     });

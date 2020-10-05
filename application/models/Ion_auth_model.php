@@ -1450,7 +1450,7 @@ class Ion_auth_model extends CI_Model
         // if no id was passed use the current users id
         $id || $id = $this->jwt->user_id;
 
-        return $this->db->select('wilayah_id,nama_wilayah')
+        return $this->db->select('wilayah_id,nama_wilayah,kantor_id,gudang_id,group_id')
             ->where($this->tables['users_groups'] . '.' . $this->join['users'], $id)
             ->join('m_wilayah', 'wilayah_id=id_wilayah')
             ->get($this->tables['users_groups']);
